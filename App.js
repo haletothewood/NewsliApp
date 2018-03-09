@@ -21,7 +21,24 @@ export default class App extends React.Component {
 
   onPress = (e) => {
     e.preventDefault()
-    this.setState({buttonPressed: true, showButton: false})
+    this.fetchArticlesAsync()
+    this.setState({
+      buttonPressed: true, 
+      showButton: false
+    })
+  }
+
+  async fetchArticlesAsync() {
+    await fetch('http://content.guardianapis.com/search?show-fields=all&api-key=d8d8c012-6484-4bb4-82d7-2770a7c5d029')
+    .then(response => response.json())
+    .then(responseJSON => {
+      return this.setState({
+        articleList: responseJSON.response.results
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
 
   render() {
@@ -36,12 +53,12 @@ export default class App extends React.Component {
           <View>
           {this.state.buttonPressed &&
             <View>
-              {articles.map((article, i) => {
-              return <Text key={i}>
-                {article}
-              </Text>
-              }
-            )}
+              {this.state.articleList ?
+              <View style={styles.newsContainer}>
+              {this.state.articleList.map((article) => {
+                return <Text style={styles.text}>{article.webTitle}</Text>
+              })}
+              </View> : <Text style={styles.loading}>Loading</Text>}
             </View>}
           </View>
         </View>
@@ -75,13 +92,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff'
   },
+  loading: {
+    fontFamily: 'Ubuntu-Light',
+    fontSize: 24,
+    color: '#FF69B4'
+  },
   button: {
     borderColor: '#fff', 
     borderWidth: 2
   }
 })
-
-const articles = [
-  <Text style={styles.text}>This is where the articles will go</Text>,
-  <Text style={styles.text}>But only when I've done the API</Text>
-]
