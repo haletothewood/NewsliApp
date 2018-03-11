@@ -36,7 +36,7 @@ export default Styles = StyleSheet.create({
     loading: {
       fontFamily: 'Ubuntu-Light',
       fontSize: 24,
-      color: '#FF69B4'
+      color: '#e51b4e'
     },
     button: {
       borderColor: '#fff', 

@@ -2,8 +2,8 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { Font } from 'expo'
 import { Button } from 'react-native-elements'
-import Styles from './Styles.js'
-import ArticleList from './ArticleList.js'
+import Styles from './assets/Styles.js'
+import ArticleList from './views/ArticleList.js'
 
 export default class App extends React.Component {
   state = {

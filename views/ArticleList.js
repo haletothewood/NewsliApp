@@ -1,6 +1,6 @@
 import React from 'react'
 import { RefreshControl, ScrollView, Text, View } from 'react-native'
-import Styles from './Styles.js'
+import Styles from '../assets/Styles.js'
 import Article from './Article.js'
 
 const ArticleList = (props) => {
