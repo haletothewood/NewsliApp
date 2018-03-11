@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Styles from './AppStyles.js'
+import Styles from './Styles.js'
 
 const Article = (props) => {
     return <View style={Styles.articleContainer} key={props.id}>

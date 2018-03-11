@@ -2,7 +2,7 @@ import React from 'react'
 import { RefreshControl, ScrollView, StyleSheet, Text, View, Footer } from 'react-native'
 import { Font } from 'expo'
 import { Button } from 'react-native-elements'
-import Styles from './AppStyles.js'
+import Styles from './Styles.js'
 import ArticleList from './ArticleList.js'
 
 export default class App extends React.Component {
@@ -59,15 +59,7 @@ export default class App extends React.Component {
         {this.state.showButton && 
         <Button buttonStyle={Styles.button} onPress={this.onPress} clear text='Feed Me' />}
         {this.state.buttonPressed && 
-        <ScrollView
-          refreshControl={
-              <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this.onRefresh}
-              />}
-        >
-          <ArticleList articleList={this.state.articleList} fetchArticlesAsync={this.fetchArticlesAsync} />
-        </ScrollView>}
+          <ArticleList articleList={this.state.articleList} onRefresh={this.onRefresh} refreshing={this.state.refreshing}/>}
       </View>
     )
   }
