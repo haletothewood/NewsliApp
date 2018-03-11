@@ -1,11 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { CardViewWithImage } from 'react-native-simple-card-view'
+import { Text, View } from 'react-native'
 import Styles from './Styles.js'
 
 const Article = (props) => {
-    return <View style={Styles.articleContainer} key={props.id}>
-        <Text style={Styles.text}>{props.article.webTitle}</Text>
-    </View>
+    return <CardViewWithImage
+        width={ 400 }
+        source={ {uri: props.article.fields.thumbnail} }
+        title={ props.article.webTitle }
+        titleTextAlign={'left'}
+        imageWidth={ 400 }
+        imageHeight={ 200 }
+        roundedImage={ false }
+    />
 }
 
 export default Article

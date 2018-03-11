@@ -1,5 +1,5 @@
 import React from 'react'
-import { RefreshControl, ScrollView, StyleSheet, Text, View, Footer } from 'react-native'
+import { Text, View } from 'react-native'
 import { Font } from 'expo'
 import { Button } from 'react-native-elements'
 import Styles from './Styles.js'

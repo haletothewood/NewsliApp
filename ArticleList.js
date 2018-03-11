@@ -1,5 +1,5 @@
 import React from 'react'
-import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { RefreshControl, ScrollView, Text, View } from 'react-native'
 import Styles from './Styles.js'
 import Article from './Article.js'
 
