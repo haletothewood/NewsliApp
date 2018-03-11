@@ -20,8 +20,8 @@ export default Styles = StyleSheet.create({
       justifyContent: 'flex-start',
       marginTop: 15
     },
-    scroll:{
-  
+    articleListCard: {
+      
     },
     header: {
       fontFamily: 'Ubuntu', 
