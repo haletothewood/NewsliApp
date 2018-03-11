@@ -3,6 +3,7 @@ import { RefreshControl, ScrollView, StyleSheet, Text, View, Footer } from 'reac
 import { Font } from 'expo'
 import { Button } from 'react-native-elements'
 import Styles from './AppStyles.js'
+import ArticleList from './ArticleList.js'
 
 export default class App extends React.Component {
   state = {
@@ -30,6 +31,13 @@ export default class App extends React.Component {
     })
   }
 
+  onRefresh = () => {
+    this.setState({refreshing: true});
+    this.fetchArticlesAsync().then(() => {
+      this.setState({refreshing: false});
+    });
+  }
+
   async fetchArticlesAsync() {
     await fetch('http://content.guardianapis.com/search?show-fields=all&api-key=d8d8c012-6484-4bb4-82d7-2770a7c5d029')
     .then(response => response.json())
@@ -43,43 +51,23 @@ export default class App extends React.Component {
     })
   }
 
-  onRefresh = () => {
-    this.setState({refreshing: true});
-    this.fetchArticlesAsync().then(() => {
-      this.setState({refreshing: false});
-    });
-  }
-
   render() {
     return (
-      <View style={Styles.container}>
-        {
-          this.state.fontLoaded &&
-          <View style={this.state.buttonPressed ? Styles.newsContainer:Styles.container}>
-            <Text style={Styles.header}>Newsli</Text>
-            {this.state.showButton && 
-            <Button buttonStyle={Styles.button} onPress={this.onPress} clear text='Feed Me' />}
-            <ScrollView
-            refreshControl={
+      this.state.fontLoaded &&
+      <View style={this.state.buttonPressed ? Styles.newsContainer : Styles.container}>
+        <Text style={Styles.header}>Newsli</Text>
+        {this.state.showButton && 
+        <Button buttonStyle={Styles.button} onPress={this.onPress} clear text='Feed Me' />}
+        {this.state.buttonPressed && 
+        <ScrollView
+          refreshControl={
               <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefresh}
-              />
-            }>
-              {this.state.buttonPressed &&
-              <View>
-                {this.state.articleList ?
-                <View style={Styles.articleContainer}>
-                {this.state.articleList.map((article, i) => {
-                  return <View style={Styles.articleContainer} key={i}>
-                    <Text style={Styles.text}>{article.webTitle}</Text>
-                    </View>
-                })}
-                </View> : <Text style={Styles.loading}>Loading</Text>}
-              </View>}
-            </ScrollView>
-          </View>
-        }
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh}
+              />}
+        >
+          <ArticleList articleList={this.state.articleList} fetchArticlesAsync={this.fetchArticlesAsync} />
+        </ScrollView>}
       </View>
     )
   }

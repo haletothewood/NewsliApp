@@ -11,8 +11,7 @@ export default Styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#000',
       alignItems: 'center',
-      justifyContent: 'flex-start',
-      marginTop: 15
+      justifyContent: 'flex-start'
     },
     articleContainer: {
       flex: 1,
