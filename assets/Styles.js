@@ -13,16 +13,6 @@ export default Styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-start'
     },
-    articleContainer: {
-      flex: 1,
-      backgroundColor: '#000',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-      marginTop: 15
-    },
-    articleListCard: {
-      
-    },
     header: {
       fontFamily: 'Ubuntu', 
       fontSize: 90,

@@ -8,27 +8,18 @@ import ArticleList from './views/ArticleList.js'
 export default class App extends React.Component {
   state = {
     fontLoaded: false,
-    buttonPressed: false,
-    showButton: true,
+    loading: true,
     refreshing: false
   }
 
   async componentWillMount() {
+    this.fetchArticlesAsync()
     await Font.loadAsync({
       'Ubuntu': require('./assets/fonts/Ubuntu-Regular.ttf'),
       'Ubuntu-Light': require('./assets/fonts/Ubuntu-Light.ttf')
     })
     
-    this.setState({fontLoaded: true})
-  }
-
-  onPress = (e) => {
-    e.preventDefault()
-    this.fetchArticlesAsync()
-    this.setState({
-      buttonPressed: true, 
-      showButton: false
-    })
+    this.setState({loading: false, fontLoaded: true})
   }
 
   onRefresh = () => {
@@ -52,15 +43,16 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      this.state.fontLoaded &&
-      <View style={this.state.buttonPressed ? Styles.newsContainer : Styles.container}>
-        <Text style={Styles.header}>Newsli</Text>
-        {this.state.showButton && 
-        <Button buttonStyle={Styles.button} onPress={this.onPress} clear text='Feed Me' />}
-        {this.state.buttonPressed && 
-          <ArticleList articleList={this.state.articleList} onRefresh={this.onRefresh} refreshing={this.state.refreshing}/>}
+    return this.state.fontLoaded &&
+      <View style={Styles.newsContainer}>
+        <Text style={Styles.header}>
+          Newsli
+        </Text>
+        <ArticleList 
+          articleList={this.state.articleList} 
+          onRefresh={this.onRefresh} 
+          refreshing={this.state.refreshing}
+        />
       </View>
-    )
   }
 }

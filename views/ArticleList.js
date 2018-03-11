@@ -16,7 +16,7 @@ const ArticleList = (props) => {
         props.articleList.map((article, i) => {
             return <Article article={article} key={i} id={i} />
         }) : 
-        <Text style={Styles.loading}>Loading</Text>}
+        <Text style={Styles.loading}>Loading...</Text>}
     </ScrollView>
 }
 
